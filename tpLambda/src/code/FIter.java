@@ -33,7 +33,6 @@ public class FIter {
         Iterable<Integer> squaredNumbers = map(numbers, x -> x * x);
         squaredNumbers.forEach(System.out::println);
 
-        // Exemple d'utilisation de filter
         Iterable<Integer> evenNumbers = filter(numbers, x -> x % 2 == 0);
         evenNumbers.forEach(System.out::println);
     }
