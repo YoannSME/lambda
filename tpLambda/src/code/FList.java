@@ -1,16 +1,22 @@
 package code;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class FList<T> {
+	private List<T> list;
+	public FList(List<T> l) {
+		this.list = l;
+	}
+	
 	public List<T> map(List<T> lst, Function<T,T> fn){
 		for(ListIterator<T> it = lst.listIterator();it.hasNext();) {
 			T elem = it.next();
-			fn.apply(elem);
-			it.set(elem);
+			it.set(fn.apply(elem));
 		}
 		return lst;	
 	}
@@ -41,6 +47,7 @@ public class FList<T> {
 		for(ListIterator<T> it = lst.listIterator();it.hasNext();) {
 			T elem = it.next();
 			if(op.test(elem)) {
+				System.out.println("index: "+it.previousIndex());
 				return true;
 			}
 		}
@@ -48,6 +55,24 @@ public class FList<T> {
 		
 	}
 	
+	public static void main(String[] args) {
+		List<Integer> lst = new ArrayList<>();
+		
+		for(int i = 0;i<150;i++) {
+			lst.add(i);
+		}
+		
+		FList op = new FList<Integer>(lst);
+		Function<Integer,Integer> add1 = x -> x+1;
+		op.map(lst, add1);
+		System.out.println(lst);
+		Predicate<Integer> divi2 = x -> x%2==0;
+		System.out.println(op.filter(lst, divi2));
+		Predicate<Integer> whereis8 = x -> x==8;
+		System.out.println(op.exists(lst, whereis8));
+		
+		
+	}
 	
 	
 
