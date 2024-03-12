@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author isaac
- *
- */
-module tpLambda {
-}
